@@ -1,0 +1,255 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{chngcntr}
+\usepackage{sectsty}
+\usepackage{xfrac}
+\usepackage{hyperref} % Uncommment to make references clickable
+\usepackage[a4paper,margin=1.5in,footskip=0.25in]{geometry}
+
+% Configuring style of references
+\hypersetup{
+    colorlinks = True,
+    allcolors = blue	
+}
+
+% Makes equation numbering based on section
+\counterwithin{equation}{section}
+
+% Changing the styling of section and subsection titles. Comment to get default styling
+\sectionfont{\centering\mdseries\scshape}
+\subsectionfont{\mdseries\scshape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Defining environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{slimDefinitionStyle} % name
+    {\topsep}                    	  % Space above
+    {\topsep}                    	  % Space below
+    {}			                   	  % Body font
+    {}                           	  % Indent amount
+    {\mdseries\scshape}			  	  % Theorem head font
+    { ---}                            % Punctuation after theorem head
+    {.5em}                       	  % Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
+\newtheoremstyle{slimTheoremStyle} 	% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\itshape}                   	% Body font
+    {}                           	% Indent amount
+    {\mdseries\scshape}			 	% Theorem head font
+    { ---}                          % Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
+\theoremstyle{slimTheoremStyle} % Comment this to get boldface theorem headers
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+% \theoremstyle{definition}
+\theoremstyle{slimDefinitionStyle}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Defining custom commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Common fonts
+\renewcommand{\cal}[1]{\mathcal{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+
+% Common sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Expectation
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Ex}[1]{\mathbb{E}\left[ #1 \right]}
+\newcommand{\ExCond}[2]{\mathbb{E} \left[\left. #1 \right| #2 \right]}
+
+% Probability
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\Pr}[1]{\mathbb{P} \left( #1 \right)}
+\newcommand{\PrCond}[2]{\mathbb{P} \left( \left. #1 \right| #2 \right)}
+
+% Common distributions 
+\newcommand{\dNorm}[2]{\mathcal(N)\left( #1, #2 \right)}
+\newcommand{\dExp}[1]{\text{Exp} \left( #1 \right)}
+\newcommand{\dBer}[1]{\text{Ber} \left( #1 \right)}
+
+% Miscellaneous math stuff
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\section{Basic Coupling}
+\label{sec:basic_coupling}
+
+\begin{quote}
+{\small In this section we construct the East-process and the 1-sided contact process on the same probability space using the graphical method.}
+\end{quote}
+
+\subsection{Construction}
+Let $\cal{C}=(E_{x,k}, B_{x,k})_{x \in \Z, k \in \N^+}$ be a collection of independent random variables with $E_{x,k} \sim \dExp{1}$ and $B_{x,k} \sim \dBer{p=1-q}$. We construct the East-process $\sigma \defeq (\sigma_t)_{t \geq 0}$ and the 1-sided contact process $\eta \defeq (\eta_t)_{t \geq 0}$ using $\cal{C}$ as follows: \\
+For each site $x \in \Z$ at each time $T_{x,n} \defeq \sum\limits_{k=1}^n E_{x,k}$:
+\begin{itemize}
+  \item If $B_{x,n} = 1$:
+  \begin{enumerate}
+  	\item If $\sigma_{T_{x,n}} (x-1) = 1$ update $\sigma$ to 1 at site x
+  	\item If $\eta_{T_{x,n}} (x-1) = 1$ update $\eta$ to 1 at site x
+  \end{enumerate}
+  \item Else:
+  \begin{enumerate}
+  	\item If $\sigma_{T_{x,n}} (x-1) = 1$ update $\sigma$ to 0 at site x
+  	\item Update $\eta$ to 0 at site x
+  \end{enumerate}
+\end{itemize}
+
+\begin{remark}[Time change]\label{rem:time_change}
+In what follows we only consider contact processes with $\frac{p}{q} > \lambda_c$ where $\lambda_c$ is the critical parameter for the 1-sided contact process on $\Z$. If $\tau^A \defeq \tau(\eta^A_.) \defeq \inf\{t \geq 0 \mid \eta^A_t = \varnothing \}$, then this implies that $\Pr{\tau^{\{0\}} = \infty} > 0$. If $p$ satisfies this constraint, we call the correspoding East and contact processes supercritical. (I'm not sure about this remark - might need to use higher value to get access to results from \cite{durrett1983supercritical})
+\end{remark}
+
+Suppose we start the processes $\sigma$ and $\eta$ from the initial configurations $A,B \in \Omega \defeq \{0, 1\}^\Z$ respectively. The resulting processes are denoted $(\sigma^A_t)_{t \geq 0}$ and $(\eta^B_t)_{t \geq 0}$. Note that because of the natural bijection between the power set of $\Z$ and $\Omega$, we will consider the values $\sigma_t$ and $\eta_t$ as subsets of $\Z$ and elements of $\Omega$ interchangeably.  
+
+\subsection{Monotonicity}
+Suppose at some time $t \geq 0$ $\eta_t \leq \sigma_t$. Then $\eta_{t+s} \leq \sigma_{t+s}\ \forall s \geq 0$. To see this note that $\eta$ updates a particular site to 1 only if $\sigma$ does too, and $\sigma$ updates a particular site to 0 only if $\eta$ does too. In particular, if $X(\xi)$ denotes the position of the rightmost one - also known as the front - of $\xi \in \Omega$ then $X(\eta_{t+s}) \leq X(\sigma_{t+s})\ \forall s \geq 0$. 
+
+\section{Front propagation of the East-process}
+
+\begin{quote}
+{\small In this section we prove at least linear speed for the front of the East-process by comparing it to the 1-sided contact process, closely following the arguments of \cite{blondel2018front}.}
+\end{quote}
+
+We use the following result without proof:
+\begin{lemma}[\cite{durrett1983supercritical} Section 4 Theorems 4 \& 5]\label{lem:durrett}
+If $(\eta_t)_{t \geq 0}$ is a supercritical, 1-sided contact process and $\tau$ is as in Remark \ref{rem:time_change} then $\exists\ \alpha > 0$ such that $\forall a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}\label{eqn:durret_decay}
+  \PrCond{X(\eta^{\{0\}}_t) < at}{\tau^{\{0\}} = \infty} \leq C e^{-\gamma t}  && \forall t \geq 0
+  \intertext{Furthermore, if $A \subset \Z$ with $|A| < \infty$  then $\exists\ \gamma, C > 0$ such that}
+  \Pr{t < \tau(\eta^A_.) < \infty } \leq C e^{-\gamma t} && \forall t \geq 0
+\end{align}
+\end{lemma}
+
+\subsection{Restart argument}
+
+\begin{theorem}[Coupling East and surviving contact processes]\label{thm:restart_coupling}
+There exists a process $(\sigma_t, \eta_t)_{t \geq 0}$ taking values in $\Omega^2$ and a random variable $T$ taking values in $[0, \infty)$ such that 
+\begin{enumerate}[(i)]
+  \item $(\sigma_t)$ is an East-process started from $\{0\}$
+  \item $\forall t \geq 0\ \&\ \forall x \in \Z,\ \eta_t(x) \leq \sigma_t(x)$
+  \item $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from $\{0\}$
+\end{enumerate}
+Furthermore $T$ has exponentially decaying tail probabilities. 
+\end{theorem}
+
+\begin{proof}
+Let $\{ \cal{C}^{(i)}\}_{i \in \N^+}$ be independent copies of $\cal{C}$. Denote by $\eta^{(i)}_.$ the 1-sided contact process started from $\{0\}$, constructed using $\cal{C}^{(i)}$. Furthermore let $U_i = \tau(\eta^{(i)}_.)$ be the extinction time of $\eta^{(i)}_.$. \\
+The $U_i$ are iid, and $\mu \defeq \Pr{U_1 = \infty} > 0$ by Remark \ref{rem:time_change}. Define $L = \min \{ i: U_i = \infty \}$ and note that $L$ has geometric distribution. Finally, let $T = \sum\limits^{L-1}_{i=1} U_i$ with $T=0$ if $L=1$. \\
+First we show that $T$ has exponentially decaying tail probabilities. Note that this is equivalent to both 1) finiteness of $\Ex{e^{sT}}$ for all $s$ in a neighbourhood of zero 2) finiteness of $\Ex{e^{s_i T}}\ i=1,2$ for some $s_1 > 0$ and $s_2 < 0$. To see the latter holds for $T$ observe that conditional on $L$, $U_1, ..., U_{L-1}$ are iid with distribution equal to that of $U_1$ given $U_1 < \infty$. From \ref{lem:durrett} it follows that $U_1 | U_1 < \infty$ has exponentially decaying tail probabilities:
+\begin{align*}
+\Pr{U_1 > t | U_1 < \infty} = \frac{\Pr{t < U_1 < \infty}}{\Pr{U_1 < \infty}} \leq \frac{C e^{- \gamma t}}{1 - \mu}
+\end{align*}
+Thus for $s > 0$ small enough such that $\ExCond{e^{sU_1}}{U_1 < \infty} < \infty$, we have
+\begin{align*}
+\Ex{e^{sT}} &= \Ex{\ExCond{\exp\left(s\sum\limits_{i=1}^{L-1} U_i \right)}{L}} \\
+            &= \Ex{\ExCond{e^{s U_1}}{U_1 < \infty}^{L-1}} < \infty \\
+\end{align*}
+Where finiteseness follows as $L$ has geometric distribution. Since $T \geq 0$ the moment generating function is finite for all $s < 0$. \\
+Now we construct the process $(\sigma_t, \eta_t)_{t \geq 0}$:
+\begin{enumerate}
+  \item Let $(\sigma^{[1]}_t, \eta^{[1]}_t)_{t \geq 0}$ be the basic coupling started from (\{0\}, \{0\}), constructed using $\cal{C}^{(1)}$. 
+  \item Assuming $(\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$ has been constructed, define $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0}$ as :
+  \begin{itemize}
+    \item If $T_i \defeq \sum\limits^i_{j=1} U_j = \infty$ then $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$
+    \item Else, set $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{T_i > t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{T_i > t \geq 0}$ and let $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq T_i}$ be the basic coupling started from $(\sigma^{[i]}_{T_i}, \{0\})$, constructed using $\cal{C}^{(i+1)}$. 
+  \end{itemize}
+\end{enumerate}
+Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t){t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East-process started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from \{0\}. Noting that an East-process started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
+\end{proof}
+
+\subsection{Linear lower bound on front propagation}
+
+\begin{corollary}\label{cor:lower_linear_speed}
+Let $(\sigma_t)_{t \geq 0}$ be a supercritical East-process. Then $\exists\ \alpha > 0$ such that $\forall\ a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}
+\Pr{X(\sigma_t) < at} \leq C e^{-\gamma t} && \forall t \geq 0
+\end{align}
+\end{corollary}
+
+\begin{remark}
+In the following proof the values of the constants $\gamma\ \&\ C$ change from line to line, without explicit mention. 
+\end{remark}
+
+\begin{proof}
+Let $(\sigma_t)_{t \geq 0},\ (\eta_t)_{t \geq 0}$ and $T$ be as in Theorem \ref{thm:restart_coupling}. Since $\eta_{T + .}$ survives, by Lemma \ref{lem:durrett} (i) $\exists\ \alpha > 0$ such that $\forall\ a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}\label{eqn:surviving_exp_decay}
+  \Pr{X(\eta_{T+t}) < at} &\leq C e^{- \gamma t}  &&\forall t \geq 0
+\end{align}
+By Theorem \ref{thm:restart_coupling} (ii) we know that $\eta_t \leq \sigma_t$ for all $t \geq 0$, so that for $c \in (0,1)$ we have
+\begin{align*}
+  \Pr{X(\sigma_t) < at,\ 0 \leq T \leq ct} &\leq \Pr{X(\eta_t) < at,\ (1-c)t \leq t-T \leq t} \\
+                                           &=    \Pr{X(\eta_{T + (t - T)}) < at,\ t \leq \frac{t-T}{1-c} \leq \frac{t}{1-c}} \\
+                                           &\leq \Pr{X(\eta_{T + (t - T)}) < \frac{a(t - T)}{1-c},\ t \leq \frac{t-T}{1-c} \leq \frac{t}{1-c}} \\
+                                           &\leq \sup\limits_{u \in [(1-c)t,t]} \Pr{X(\eta_{T + u}) < \frac{au}{1-c}} \\
+  \intertext{For $c$ small enough such that $\frac{a}{1-c} < \alpha$ it follows by (\ref{eqn:surviving_exp_decay}) that}
+                                           &\leq \sup\limits_{u \in [(1-c)t,t]} C e^{-\gamma u} \\
+                                           &= C e^{-\gamma (1-c) t} \\
+                                           &= C e^{-\gamma t} \\ 
+  \intertext{To get the conclusion observe that}
+    \Pr{X(\sigma_t) < at}  &\leq \Pr{X(\sigma_t) < at,\ 0 \leq T \leq ct} + \Pr{T > ct} \\
+                            &\leq C_1 e^{-\gamma_1 t} + C_2 e^{-\gamma_2 t} \leq C e^{-\gamma t}
+\end{align*}
+\end{proof}
+
+\section{Mixing of the East-process}
+\begin{quote}
+{\small In this section we prove that the mixing time of the supercritical East-process on $[0, L]$ with a 1 fixed at the origin is $\cal{O}(L)$}
+\end{quote}
+
+\subsection{A property of basic coupling}
+As before, let $(\sigma^\xi_t)_{t \geq 0}$ denote the East-process on $\Z$ started from initial configuration $\xi \in \Omega$, constructed using $\cal{C} = (E_{x,k}, B_{x,k})_{x \in \Z,\ k \in \N^+}$. For $l \in \N$, let $\rho_l \defeq \min\{ t \geq 0 \mid \sigma^{\{0\}}(l) = 1\}$ be the hitting time of $l$ by the East-process started from $\{ 0 \}$. Note that $0 = \rho_0 \leq \rho_1 \leq \rho_2 \leq ... < \infty$ with finiteness following from at least linear propagation of the front. Finally, let $A_l \defeq \{0,\ 1,\ ...\ l \}$.  
+
+\begin{lemma}\label{lem:East_linear_coupling}
+For each $l \in \N$, and $\{0\} \subseteq \xi \subseteq \N$, it holds that 
+\begin{align}
+\sigma^{\{0\}}_{\rho_l + t} \cap A_l &= \sigma^\xi_{\rho_l + t} \cap A_l &&\forall t \geq 0
+\end{align}
+\end{lemma}
+
+\begin{proof}
+We proceed by induction. The claim clearly holds for $l=0$ since every such $\xi$ has a 1 at the origin forever. For the induction step suppose that the claim holds up to $l=n \geq 1$. Let $K$ be such that $T_{n+1, K} \defeq \sum\limits^{K}_{i=1} E_{n+1, i} = \rho_{n+1}$. Then $B_{n+1, K}=1$, and since the ring is legal, $\sigma^{\{0\}}_{\rho_{n+1}}(n) = 1$, furthermore by the induction hypothesis also $\sigma^\xi_{\rho_{n+1}}(n) = 1$ i.e. the ring is also legal for $\sigma^\xi_.$. Thus both processes update to 1 at time $\rho_{n+1}$. Now, since the $\rho_i$ are stopping times, $(\sigma^{\{0\}}_{\rho_{n+1}+t})_{t \geq 0}\ \&\ (\sigma^\xi_{\rho_{n+1} + t})_{t \geq 0}$ are two East-processes with $\sigma^{\{0\}}_{\rho_{n+1}} \cap A_{n+1} = \sigma^\xi_{\rho_{n+1}} \cap A_{n+1}$. The conclusion follows by basic coupling. 
+\end{proof}
+
+\subsection{Linear bound on mixing}
+\begin{theorem}
+For each supercritical East-process with a 1 fixed at the origin, there exists a constant $K > 0$ such that for all $L \in \N$, the mixing time $T^L_{mix}$ on $\{1, 2, ... L\}$ satisfies $T^L_{mix} \leq KL$.  
+\end{theorem}
+
+\begin{proof}
+By \cite{levin2017markov} Corollary 5.3, for any coupling of the East-process it holds that 
+\begin{align}
+d(t) \leq \max\limits_{\nu, \xi \in \Omega} \P_{\nu, \xi} ( \tau_{couple} > t )
+\end{align}
+Lemma \ref{lem:East_linear_coupling} gives $\max\limits_{\nu, \xi \in \Omega} \P_{\nu, \xi} ( \tau_{couple} > t ) \leq \Pr{\rho_L > t}$. Borrowing notation from Corollary \ref{cor:lower_linear_speed} we get 
+\begin{align*}
+\Pr{\rho_L > KL} &\leq \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < L} \\
+                 &= \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < \frac{KL}{K}} \\
+  \intertext{Fix $K$ large enough such that $\sfrac{1}{K} < \alpha$ to get}
+                 &\leq C e^{-\gamma K L}
+\end{align*}
+Thus for say $L \geq L'$, $\Pr{X\left(\sigma^{\{0\}}_{KL} \right) < L} \leq \sfrac{1}{4}$. This implies $d(KL) \leq \sfrac{1}{4}$ i.e. $T^L_{mix} \leq KL\ \forall L \geq L'$. Take $K' = \max\lbrace K, T^1_{mix}, T^2_{mix},... T^{L' - 1}_{mix} \rbrace$. Then $T^L_{mix} \leq K'L$ holds for all $L \in \N$ as required. 
+\end{proof}
+
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}
