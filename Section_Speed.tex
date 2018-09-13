@@ -1,0 +1,146 @@
+\section{Front propagation of the East-process}
+
+\begin{quote}
+{\small In this section we prove linear speed for the front of the East-process. The upper bound follows from classical results for Poisson point processes, while the lower bound is established by a comparison with the 1-sided contact process, closely following the arguments of \cite{blondel2018front}. }
+\end{quote}
+
+First we formalize the notion of the front that we discussed Section \ref{sec:introduction}. 
+\begin{definition}
+For $A \subseteq \Z$ the front of $A$ is defined as $X(A) \defeq \max (A) \in \N \cup \{-\infty, \infty \}$ with $\max(\varnothing) \defeq -\infty$. 
+\end{definition}
+
+The following result will be used without proof:
+\begin{lemma}[\cite{durrett1983supercritical} Section 4 Theorems 4 \& 5]\label{lem:durrett}
+If $(\eta_t)_{t \geq 0}$ is a supercritical, 1-sided contact process, $\tau$ is the extinction time as defined in Remark \ref{ssec:time_change} and $X(\eta_t)$ denotes the front of $\eta_t$, then $\exists\ \alpha > 0$ such that $\forall a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}\label{eqn:durret_decay}
+  \PrCond{X(\eta^{\{0\}}_t) < at}{\tau(\eta^{\{0\}}_.) = \infty} \leq C e^{-\gamma t}  && \forall t \geq 0
+  \intertext{Furthermore, if $A \subset \Z$ with $|A| < \infty$  then $\exists\ \gamma, C > 0$ such that}
+  \Pr{t < \tau(\eta^A_.) < \infty } \leq C e^{-\gamma t} && \forall t \geq 0
+\end{align}
+\end{lemma}
+
+\subsection{Restart argument}
+
+\begin{theorem}[Coupling East and surviving contact processes]\label{thm:restart_coupling}
+There exists a process $(\sigma_t, \eta_t)_{t \geq 0}$ taking values in $\Omega^2$ and a random variable $T$ taking values in $[0, \infty)$ such that 
+\begin{enumerate}[(i)]
+  \item $(\sigma_t)$ is a supercritical East-process started from $\{0\}$
+  \item $\forall t \geq 0\ \&\ \forall x \in \Z,\ \eta_t(x) \leq \sigma_t(x)$
+  \item $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from $\{0\}$
+\end{enumerate}
+Furthermore $T$ has exponentially decaying tail probabilities. 
+\end{theorem}
+
+\begin{proof}
+Let $\{ \cal{C}^{(i)}\}_{i \in \N^+}$ be independent copies of $\cal{C}$. Denote by $\eta^{(i)}_.$ the 1-sided contact process started from $\{0\}$, constructed using $\cal{C}^{(i)}$. Furthermore let $U_i = \tau(\eta^{(i)}_.)$ be the extinction time of $\eta^{(i)}_.$. \\
+The $U_i$ are iid, and $\mu \defeq \Pr{U_1 = \infty} > 0$ by Remark \ref{rem:time_change}. Define $L = \min \{ i: U_i = \infty \}$ and note that $L$ has geometric distribution. Finally, let $T = \sum\limits^{L-1}_{i=1} U_i$ with $T=0$ if $L=1$. \\
+First we show that $T$ has exponentially decaying tail probabilities. Note that this is equivalent to finiteness of $\Ex{e^{s_i T}}\ i=1,2$ for some $s_1 > 0$ and $s_2 < 0$. To see the latter holds for $T$ observe that conditional on $L$, $U_1, ..., U_{L-1}$ are iid with distribution equal to that of $U_1$ given $U_1 < \infty$. From (\ref{lem:durrett}) it follows that $U_1 | U_1 < \infty$ has exponentially decaying tail probabilities:
+\begin{align*}
+\Pr{U_1 > t | U_1 < \infty} = \frac{\Pr{t < U_1 < \infty}}{\Pr{U_1 < \infty}} \leq \frac{C e^{- \gamma t}}{1 - \mu}
+\end{align*}
+Thus for $s > 0$ such that $\ExCond{e^{sU_1}}{U_1 < \infty} < \infty$, we have
+\begin{align*}
+\Ex{e^{sT}} &= \Ex{\ExCond{\exp\left(s\sum\limits_{i=1}^{L-1} U_i \right)}{L}} \\
+            &= \Ex{\ExCond{e^{s U_1}}{U_1 < \infty}^{L-1}} < \infty \\
+\end{align*}
+Where finiteseness follows as $L$ has geometric distribution and so finite moment generating function for all $s \in \R$. Since $T \geq 0$, its moment generating function is finite for all $s < 0$ thus T has exponentially decaying tail probabilities. \\
+Now we construct the process $(\sigma_t, \eta_t)_{t \geq 0}$:
+\begin{enumerate}
+  \item Let $(\sigma^{[1]}_t, \eta^{[1]}_t)_{t \geq 0}$ be the basic coupling started from (\{0\}, \{0\}), constructed using $\cal{C}^{(1)}$. 
+  \item Assuming $(\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$ has been constructed, define $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0}$ as :
+  \begin{itemize}
+    \item If $T_i \defeq \sum\limits^i_{j=1} U_j = \infty$ then $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$
+    \item Else, set $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{T_i > t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{T_i > t \geq 0}$ and let $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq T_i}$ be the basic coupling started from $(\sigma^{[i]}_{T_i}, \{0\})$, constructed using $\cal{C}^{(i+1)}$. 
+  \end{itemize}
+\end{enumerate}
+Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t){t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East-process started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from \{0\}. Noting that an East-process started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
+\end{proof}
+
+\subsection{Linear lower bound on propagation}
+
+\begin{corollary}\label{cor:lower_linear_speed}
+Let $(\sigma_t)_{t \geq 0}$ be a supercritical East-process and $X(\sigma_t)$ be its front. Then $\exists\ \alpha > 0$ such that $\forall\ a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}
+\Pr{X(\sigma_t) < at} \leq C e^{-\gamma t} && \forall t \geq 0
+\end{align}
+\end{corollary}
+
+\begin{remark}
+In the following proof the values of the constants $\gamma\ \&\ C$ change from line to line, without explicit mention. 
+\end{remark}
+
+\begin{proof}
+Let $(\sigma_t)_{t \geq 0},\ (\eta_t)_{t \geq 0}$ and $T$ be as in Theorem \ref{thm:restart_coupling}. Since $\eta_{T + .}$ survives, by Lemma \ref{lem:durrett} part (i) $\exists\ \alpha > 0$ such that $\forall\ a < \alpha\ \exists\ \gamma, C > 0$ satisfying 
+\begin{align}\label{eqn:surviving_exp_decay}
+  \Pr{X(\eta_{T+t}) < at} &\leq C e^{- \gamma t}  &&\forall t \geq 0
+\end{align}
+By Theorem \ref{thm:restart_coupling} part (ii) we know that $\eta_t \leq \sigma_t$ for all $t \geq 0$, so that for $c \in (0,1)$ we have
+\begin{align*}
+  \Pr{X(\sigma_t) < at,\ 0 \leq T \leq ct} &\leq \Pr{X(\eta_t) < at,\ (1-c)t \leq t-T \leq t} \\
+                                           &=    \Pr{X(\eta_{T + (t - T)}) < at,\ t \leq \frac{t-T}{1-c} \leq \frac{t}{1-c}} \\
+                                           &\leq \Pr{X(\eta_{T + (t - T)}) < \frac{a(t - T)}{1-c},\ t \leq \frac{t-T}{1-c} \leq \frac{t}{1-c}} \\
+                                           &\leq \sup\limits_{u \in [(1-c)t,t]} \Pr{X(\eta_{T + u}) < \frac{au}{1-c}} \\
+  \intertext{For $c$ small enough such that $\frac{a}{1-c} < \alpha$ it follows by (\ref{eqn:surviving_exp_decay}) that}
+                                           &\leq \sup\limits_{u \in [(1-c)t,t]} C e^{-\gamma u} \\
+                                           &= C e^{-\gamma (1-c) t} \\
+                                           &= C e^{-\gamma t} \\ 
+  \intertext{To get the conclusion observe that}
+    \Pr{X(\sigma_t) < at}  &\leq \Pr{X(\sigma_t) < at,\ 0 \leq T \leq ct} + \Pr{T > ct} \\
+                           &\leq C_1 e^{-\gamma_1 t} + C_2 e^{-\gamma_2 t} \leq C e^{-\gamma t}
+\end{align*}
+\end{proof}
+
+\subsection{Finite speed of propagation}
+
+\begin{definition}[Hitting times]\label{def:hitting_times}
+Let $(\sigma_t)_{t \geq 0}$ be the East-process started from $\{0\}$ and for $l \in \N$ define $\rho_l \defeq \min\{ t \geq 0 \mid \sigma_t(l) = 1\}$ to be the hitting time of site $l$. 
+\end{definition}
+
+Note that $0 = \rho_0 \leq \rho_1 \leq \rho_2 \leq ... < \infty$ with finiteness following from at least linear propagation of the front since $\Pr{\rho_l = \infty} = \lim_{t \rightarrow \infty} \Pr{\rho_l > t} \leq \lim_{t \rightarrow \infty} \Pr{X\left( \sigma_t\right) < l} = 0$.
+
+We wish to bound the quantity $\Pr{\rho_l \leq t}$ to control the speed of the front since  $\{X \left( \sigma_t \right) \geq l \} \subset \{\rho_l \leq t \}$. To this end, consider the stopping times $T_i$ for $i \in \N$ defined as $T_{i+1} \defeq \min\{ T_{i+1, k} \mid T_{i+1, k} > T_i\ \&\ k \in \N^+ \}$ with $T_0 = 0$. Consider the process $M_t \defeq |\{i \geq 1 \mid T_i \leq t \}|$ i.e. the process counting the number of $T_i$ that have occured up to time t. By repeated application of the strong markov property we get that the process $(M_t)_{t \geq 0}$ is in fact a Poisson process of rate 1. \\
+
+Define the events $F(l, t) \defeq \{ \text{there is a succession of rings up to site $l$ in the time interval $[0,t]$} \}$ for $l \in \N^+$ and $t \geq 0$ where by succession of rings up to site $l$ we mean an increasing sequence of rings starting at site 1 and ending at site $l$. It is clear that $\Pr{\rho_l \leq t} \leq \Pr{F(l, t)}$ and by the definition of $(M_t)_{t \geq 0}$ it follows that $\Pr{F(l, t)} = \Pr{M_t \geq l}$. The following standard result gives us the desired upper bound. 
+
+\begin{lemma}\label{lem:chernoff}
+Let $X \sim \dPoi{\lambda}$ be a Poisson random variable with mean $\lambda > 0$. Then 
+\begin{align}
+\Pr{X \geq x} &\leq \frac{e^{-\lambda}(e \lambda)^x}{x^x} &&\forall x > \lambda
+\end{align} 
+\end{lemma}
+
+\begin{proof}
+The result follows by a Chernoff bound argument. For all $t > 0$ we have
+\begin{align*}
+\Pr{X \geq x} &\leq \frac{\Ex{e^{tX}}}{e^{tx}} = \exp\left( \lambda e^t - \lambda - tx \right)
+\end{align*} 
+The minimimum occurs at $t = \log\left( \frac{x}{\lambda} \right)$, giving the result. 
+\end{proof}
+
+We are now ready to prove the linear upper bound on the speed of the East-process.
+
+\begin{theorem}\label{thm:speed_upper_bound}
+Let $(\sigma_t)_{t \geq 0}$ be an East-process started from $\{0\}$ and $X(\sigma_t)$ be its front. Then there exist $v, \gamma > 0$ such that 
+\begin{align}
+\Pr{X(\sigma_t) > vt} &\leq e^{- \gamma t} &&\forall t \geq 0
+\end{align}
+\end{theorem}
+
+\begin{remark}
+In the following proof we omit the use of the floor function $\floor{\cdot}$ for clarity of notation, treating non-integer values as integers. It is however clear that the proof could be adapted to be precise. 
+\end{remark}
+
+\begin{proof}
+Let $v > 1$. Using Lemma \ref{lem:chernoff} and the discussion before it the calculation of an upper bound becomes straightforward:
+\begin{align*}
+\Pr{X(\sigma_t) > vt} &\leq \Pr{\rho_{vt} \leq t} \leq \Pr{F(vt, t)} \\
+                     &= \Pr{M_t \geq vt} \leq \frac{e^{-t}(e t)^{vt}}{(vt)^{vt}} \\
+                     &= \exp\left( -t + vt(log\left(\sfrac{t}{vt}\right) + 1)\right) \\
+                     &\leq \exp\left( -t + vt (1 - log(v))\right) \leq \exp(vt (1 - log(v)))
+\end{align*}
+The result follows by taking $v > e$ and $\gamma = - v (1 - log(v))$. 
+\end{proof}
+
+
+
+
