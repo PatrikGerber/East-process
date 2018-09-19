@@ -1,31 +1,29 @@
 \section{Mixing of the East-process}
 \begin{quote}
-{\small In this section we prove that the mixing time of the supercritical East-process on $[0, L]$ with a 1 fixed at the origin is $\Omega(L)$}
+{\small In this section we prove that the mixing time of the supercritical East-process on $[0, L]$ with a 1 fixed at the origin is $\Theta(L)$}
 \end{quote}
 
 In this section we will study the evolution of the East-process restricted to the segment [0, L] where $L \in \N$. In doing so we will assume that there is a 1 fixed at the origin. However, because of the local constraint of the East-process, when studying the East-process restricted to $\{0, 1, ..., L\}$ it doesn't matter whether we 1) fix a 1 at the origin or 2) only consider East-processes started from $\{0\} \subseteq \xi \subseteq \N$; the results of the analysis will be the same. Motivated by this we make two definitions:
 
 \begin{definition}
-Define $\widetilde{\Omega} \defeq \{A \subseteq \N \mid 0 \in A \}$ to be the set of configurations that are 0 on the negatives and 1 at the origin. Similarly, for $L \in \N$ define $\Omega_L \defeq \widetilde{\Omega} \cap [0, L]$ to be the state space of the East-process on $\{0, 1, ..., L\}$ with a fixed 1 at the origin. 
+Define $\widetilde{\Omega} \defeq \{A \subseteq \N \mid 0 \in A \}$ to be the set of configurations that are 0 on the negatives and 1 at the origin. Similarly, for $L \in \N$ define $\Omega_L \defeq \{ A \cap [0, L] \mid A \in \widetilde{\Omega} \}$ to be the state space of the East-process on $\{0, 1, ..., L\}$ with a fixed 1 at the origin. 
 \end{definition}
 
-Another important property of the East-process is that the evolution at some site $x \in \N$ is not influenced by how the process evolves at sites to the right of $x$. More precisely, if $(\sigma_t)_{t \geq 0}$ is an East-process then for any $x \in \N$ and $t \geq 0$, $\sigma_t (x)$ is independent of the sigma algebra $\sigma \left( (E_{n,k}, B_{n,k})_{n > x, k > 0}\right)$. It is because of this that the East-process with a fixed 1 at the origin is a continuous time Markov chain when restricted to $\{0, 1, ..., L\}$. 
+Another important property of the East-process is that the evolution at some site $x \in \N$ is not influenced by how the process evolves at sites to the right of $x$. More precisely, if $(\sigma_t)_{t \geq 0}$ is an East-process then for any $x \in \N$ and $t \geq 0$, $\sigma_t (x)$ is independent of the sigma algebra $\sigma \left( (E_{n,k}, B_{n,k})_{n > x, k > 0}\right)$. Furthermore, if we fix a 1 at the origin (or equivalently start from a configuration in $\widetilde{\Omega}$) then an even stronger independence holds in that the evolution to the right of the origin is independent of all the clock rings and coin tosses left of the origin. Therefore the East-process with a fixed 1 at the origin is a continuous time Markov chain when restricted to $\{0, 1, ..., L\}$. 
 
 \subsection{Coupling time for basic coupling}
-As before, let $(\sigma^\xi_t)_{t \geq 0}$ denote the East-process on $\Z$ started from initial configuration $\xi \in \Omega$, constructed using $\cal{C} = (E_{x,k}, B_{x,k})_{x \in \Z,\ k \in \N^+}$. Recall the definition of the hitting times $(\rho_i)_{i \in \N}$ from Definition \ref{def:hitting_times}.  
+As before, let $(\sigma^\xi_t)_{t \geq 0}$ denote the East-process on $\Z$ started from initial configuration $\xi \in \Omega$, constructed using $\scr{P} = (E_{x,k}, B_{x,k})_{x \in \Z,\ k \in \N^+}$. Recall the definition of the hitting times $(\rho_i)_{i \in \N}$ from Definition \ref{def:hitting_times}.  
 
 
 \begin{proposition}\label{prop:East_linear_coupling}
-For each $l \in \N$ and $\xi \in \widetilde{\Omega}$ it holds that 
+For each $l \in \N$ and for all $\xi, \nu \in \widetilde{\Omega}$ it holds that 
 \begin{align}
-\sigma^{\{0\}}_{\rho_l + t} \cap [0, l] &= \sigma^\xi_{\rho_l + t} \cap [0, l] &&\forall t \geq 0 \\
-\intertext{Furthermore for all $\xi, \nu \in \widetilde{\Omega}$ it holds that}
-\sigma^\xi_{\rho_l + t} \cap [0, l] &= \sigma^\nu_{\rho_l + t} \cap [0, l] &&\forall t \geq 0 
+\sigma^\xi_{\rho_l + t} \cap [0, l] &= \sigma^\nu_{\rho_l + t} \cap [0, l] &&\forall t \geq 0. \label{eqn:hitting_coupling}
 \end{align}
 \end{proposition}
 
 \begin{proof}
-We proceed by induction. The claim clearly holds for $l=0$ since every such $\xi$ has a 1 at the origin forever. For the induction step suppose that the claim holds up to $l=n \geq 1$. Let $K$ be such that $T_{n+1, K} \defeq \sum\limits^{K}_{i=1} E_{n+1, i} = \rho_{n+1}$. Then $B_{n+1, K}=1$, and since the ring is legal, $\sigma^{\{0\}}_{\rho_{n+1}}(n) = 1$, furthermore by the induction hypothesis also $\sigma^\xi_{\rho_{n+1}}(n) = 1$ i.e. the ring is also legal for $\sigma^\xi_.$. Thus both processes update to 1 at time $\rho_{n+1}$. Now, since the $\rho_i$ are stopping times, $(\sigma^{\{0\}}_{\rho_{n+1}+t})_{t \geq 0}\ \&\ (\sigma^\xi_{\rho_{n+1} + t})_{t \geq 0}$ are two East-processes with $\sigma^{\{0\}}_{\rho_{n+1}} \cap [0, n+1] = \sigma^\xi_{\rho_{n+1}} \cap [0, n+1] $. The conclusion follows by basic coupling and the second claim is immediate. 
+We only prove (\ref{eqn:hitting_coupling}) for $\nu = \{0\}$ from which the result follows easily for arbitrary $\nu$. We proceed by induction. The claim clearly holds for $l=0$ since every such $\xi$ has a 1 at the origin forever. For the induction step suppose that the claim holds up to $l=n \geq 0$. If $K$ is such that $T_{n+1, K} = \rho_{n+1}$ then $B_{n+1, K}=1$, and since the ring is legal, $\sigma^{\{0\}}_{\rho_{n+1}}(n) = 1$. By the induction hypothesis also $\sigma^\xi_{\rho_{n+1}}(n) = 1$ i.e. the ring is also legal for $\sigma^\xi_.$. Thus both processes update to 1 at time $\rho_{n+1}$. Now, since the $\rho_i$ are stopping times, $(\sigma^{\{0\}}_{\rho_{n+1}+t})_{t \geq 0}$ and $(\sigma^\xi_{\rho_{n+1} + t})_{t \geq 0}$ are two East-processes with $\sigma^{\{0\}}_{\rho_{n+1}} \cap [0, n+1] = \sigma^\xi_{\rho_{n+1}} \cap [0, n+1] $. The conclusion follows by basic coupling. 
 \end{proof}
 
 \subsection{Results for continuous Markov chains}
@@ -39,7 +37,7 @@ Let $(\Omega, \cal{F})$ be a measurable space and $\nu, \mu$ be two probability 
 % \end{notation}
 
 \begin{definition}[Distance from equilibrium]\label{def:eq_distance}
-Let $M \defeq (M_t)_{t \geq 0}$ be a continuous time, irreducible Markov chain taking values in a finite state space $\Omega$ and let $\pi$ be its equilibrium distribution. For $t \geq 0$ define $d(t) \defeq \max\limits_{x \in \Omega} \left\Vert \PrCond{M_t \in \cdot\ }{M_0 = x} - \pi(\cdot) \right\Vert_{TV}$ to be the worst case total variation distance from equilibrium. 
+Let $N \defeq (N_t)_{t \geq 0}$ be a continuous time, irreducible Markov chain taking values in a finite state space $\Omega$ and let $\pi$ be its equilibrium distribution. For $t \geq 0$ define $d(t) \defeq \max\limits_{x \in \Omega} \left\Vert \PrCond{N_t \in \cdot\ }{N_0 = x} - \pi(\cdot) \right\Vert_{TV}$ to be the worst case total variation distance from equilibrium. 
 % Similarly define $\bar{d}(t) \defeq \max\limits_{x,y \in \Omega} \left\Vert \P^x\left( M_t \in \cdot \right) - \P^y\left( M_t \in \cdot \right) \right\Vert_{TV}$. 
 \end{definition}
 
@@ -85,27 +83,25 @@ Let $M \defeq (M_t)_{t \geq 0}$ be a continuous time, irreducible Markov chain t
 % \end{proof}
 
 \begin{theorem}\label{thm:equilibrium_distance}
-Let $M \defeq (M_t)_{t \geq 0}$ be a continuous time, irreducible Markov chain taking values in a finite state space $\Omega$ and let $\pi$ be its equilibrium distribution. Suppose that for each pair of states $x,y \in \Omega$ there is a coupling $(X_t, Y_t)_{t \geq 0}$ of $M$ that is started from $(x,y) \in \Omega^2$. For each of these couplings, let $\tau^{x, y}_{couple} \defeq \min\left\{t \geq 0 \mid X_t = Y_t \right\}$ be the first time the chains meet. Then it holds that 
+Let $N \defeq (N_t)_{t \geq 0}$ be a continuous time, irreducible Markov chain taking values in a finite state space $\Omega$ and let $\pi$ be its equilibrium distribution. Suppose that for each pair of states $x,y \in \Omega$ there is a coupling $(X_t, Y_t)_{t \geq 0}$ of $N$ that is started from $(x,y) \in \Omega^2$. For each of these couplings, let $\tau^{x, y}_{couple} \defeq \min\left\{t \geq 0 \mid X_t = Y_t \right\}$ be the first time the chains meet. Then it holds that 
 \begin{align}
 d(t) \leq \max\limits_{x,y \in \Omega} \Pr{\tau^{x, y}_{couple} > t}
 \end{align}
 \end{theorem}
 
 \begin{proof}
-The result can be found in \cite{levin2017markov} Corollary 5.3 for discrete time Markov chains, however all the necessary proofs work in the continuous time case without modification. 
+The result can be found in \cite[Corollary 5.3]{levin2017markov} for discrete time Markov chains, however all the necessary proofs work in the continuous time case without modification. 
 \end{proof}
 
 \subsection{Linear upper bound on mixing}
-\begin{definition}[Mixing time]
-In the setting of Definition \ref{def:eq_distance}, the mixing time of $M$ is defined as $t_{mix} \defeq \inf\left\{ t \geq 0 \mid d(t) \leq \sfrac{1}{4} \right\}$. 
+
+When restricted to $\{0, 1, ... L\}$, the East-process with a fixed 1 at the origin is a finite, irreducible, continuous time Markov chain with equilibrium measure $\pi_L \defeq \delta_{1} \times \dBer{p}^L$. Hence we may make the following definition:
+\begin{definition}[Mixing time of East-process]
+ The mixing time of the East-process with a fixed 1 at the origin is defined as $T^L_{mix} \defeq \inf\left\{ t \geq 0 \mid d(t) \leq \sfrac{1}{4} \right\}$. 
 \end{definition}
 
-\begin{remark}[Mixing time of East-process on $\{0, 1, ... L\}$]
-When restricted to $\{0, 1, ... L\}$, the East-process with a fixed 1 at the origin is a finite, irreducible, continuous time Markov chain with equilibrium measure $\pi_L \defeq \delta_{1} \times \dBer{p}^L$. Therefore the 'mixing time of the East-process on $\{0, 1, ... L\}$' refers to the mixing time of this restricted, finite chain. 
-\end{remark}
-
 \begin{theorem}
-For each supercritical East-process with a 1 fixed at the origin, there exists a constant $K > 0$ such that for all $L \in \N$, the mixing time $T^L_{mix}$ on $\{0, 1 ... L\}$ satisfies $T^L_{mix} \leq KL$.  
+For each supercritical East-process there exists a constant $K > 0$ such that $T^L_{mix} \leq KL$ for all $L \in \N$. 
 \end{theorem}
 
 \begin{proof}
@@ -118,32 +114,31 @@ Where $\tau^{\nu, \xi}_{couple}$ is the first time that the East-process started
 \Pr{\rho_L > KL} &\leq \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < L} \\
                  &= \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < \frac{KL}{K}} \\
   \intertext{Fix $K$ large enough such that $\sfrac{1}{K} < \alpha$ to get}
-                 &\leq C e^{-\gamma K L}
+                \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < \frac{KL}{K}} &\leq C e^{-\gamma K L}. 
 \end{align*}
-Thus for say $L \geq L'$, $\Pr{X\left(\sigma^{\{0\}}_{KL} \right) < L} \leq \sfrac{1}{4}$. This implies $d(KL) \leq \sfrac{1}{4}$ i.e. $T^L_{mix} \leq KL\ \forall L \geq L'$. 
+Thus there exists $L' \in \N$ such that for all $L \geq L'$ it holds that $\Pr{X\left(\sigma^{\{0\}}_{KL} \right) < L} \leq \sfrac{1}{4}$. This implies that $d(KL) \leq \sfrac{1}{4}$ in other words that $T^L_{mix} \leq KL$ for all $L \geq L'$. 
 \end{proof}
 
 \subsection{Linear lower bound on mixing}
 \begin{theorem}
-For each East-process with a 1 fixed at the origin, there exists a constant $K > 0$ such that for all $L \in \N$, the mixing time $T^L_{mix}$ on $\{0, 1, ... L\}$ satisfies $T^L_{mix} \geq KL$.  
+For each supercritical East-process there exists a constant $K' > 0$ such that $K'L \leq T^L_{mix}$ for all $L \in \N$. 
 \end{theorem}
 
 \begin{proof}
-From the proof of Theorem \ref{thm:speed_upper_bound} we know that $\exists\ \gamma, v > 0$ such that 
+From the proof of Theorem \ref{thm:speed_upper_bound} we know that $\exists\ \gamma, v > 0$ such that $\Pr{\rho_{tv} \leq t} \leq e^{- \gamma t}$ for all $ t \geq 0$. Thus we get
 \begin{align}
-\Pr{\rho_{tv} \leq t} &\leq e^{- \gamma t} &&\forall t \geq 0 \\
-\intertext{Thus we get}
-\Pr{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}} &\leq e^{- \gamma \frac{L}{2v}} &&\forall L \in \N
+\Pr{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}} &\leq e^{- \gamma \frac{L}{2v}} &&\forall L \in \N \label{eqn:half_hit_bound}
 \end{align}
-Define the set $A_L \defeq \{\omega \in \Omega \mid \{\sfrac{L}{2}, \sfrac{L}{2} + 1, ..., L\} \cap \omega \neq \varnothing\}$ to be the set of configurations with at least one occupied site between $\sfrac{L}{2}$ and $L$. For our proof it is crucial to note that $\PrCond{\sigma^{\{0\}}_t \in A_L}{\rho_{\sfrac{L}{2}} > t} = 0$: since $\sigma^{\{0\}}$ is started from $\{0\}$, it can be occupied at some site $x \in \N^+$ only if site $x$ has been hit i.e. it can only happen on $\{ \rho_x \leq t \}$. Let $\pi_L \defeq \delta_1 \times \dBer{p}^L$ be the product Bernoulli measure on $\Omega_L$. We have
+Define the set $A_L \defeq \{\omega \in \Omega \mid \{\sfrac{L}{2}, \sfrac{L}{2} + 1, ..., L\} \cap \omega \neq \varnothing\}$ to be the set of configurations with at least one occupied site between $\sfrac{L}{2}$ and $L$. For our proof it is crucial to note that $\PrCond{\sigma^{\{0\}}_t \in A_L}{\rho_{\sfrac{L}{2}} > t} = 0$: since $(\sigma^{\{0\}}_t)_{t \geq 0}$ is started from $\{0\}$, it is infected at some site $x \in \N^+$ only if site $x$ has been hit by the front i.e. it can only happen on $\{ \rho_x \leq t \}$. Let $\pi_L \defeq \delta_1 \times \dBer{p}^L$ be the product Bernoulli measure on $\Omega_L$. We have
 \begin{align*}
 d\left(\frac{L}{2v}\right) &= \max\limits_{\xi \in \widetilde{\Omega}} \left\Vert \Pr{\sigma^\xi_{\sfrac{L}{2v}} \cap [0,L] \in \cdot} - \pi_L(\cdot)								   \right\Vert_{TV} \\
-						   &= \max\limits_{\xi \in \Omega} \max\limits_{A \in \Omega_L} \left| \Pr{\sigma^\xi_{\sfrac{L}{2v}} \cap [0,L] \in A} - \pi_L(A) \right|\\
-						   &\geq \left| \Pr{\sigma_{\sfrac{L}{2v}} \in A_L} - \pi_L(A_L) \right| \\
-						   &= \left| \Pr{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}}\PrCond{\sigma_{\sfrac{L}{2v}} \in A_L}{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}}  - \left( 1 - q^L \right) \right| \\
-						   &\geq \min\left\{ \left| 1 - q^L - e^{- \gamma \frac{L}{2v}} \right|,  1 - q^L\right\} \xrightarrow{L \rightarrow \infty} 1
+						   &= \max\limits_{\xi \in \widetilde{\Omega}} \max\limits_{A \in \Omega_L} \left| \Pr{\sigma^\xi_{\sfrac{L}{2v}} \cap [0,L] \in A} - \pi_L(A) \right|\\
+						   &\geq \left| \Pr{\sigma^{\{0\}}_{\sfrac{L}{2v}} \in A_L} - \pi_L(A_L) \right| \\
+						   &= \left| \Pr{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}}\PrCond{\sigma^{\{0\}}_{\sfrac{L}{2v}} \in A_L}{\rho_{\sfrac{L}{2}} \leq \sfrac{L}{2v}}  - \left( 1 - q^{\sfrac{L}{2}} \right) \right| \\
+						   \intertext{Applying the bound (\ref{eqn:half_hit_bound}) gives}
+d\left(\frac{L}{2v}\right) &\geq \min\left\{ \left| 1 - q^{\sfrac{L}{2}} - e^{- \gamma \frac{L}{2v}} \right|,  1 - q^L\right\} \xrightarrow{L \rightarrow \infty} 1. 
 \end{align*}
-By the above, for say $L \geq L'$ it holds that $d\left(\frac{L}{2v}\right) > \sfrac{1}{4}$ i.e. $\frac{L}{2v} < T^L_{mix}$. Taking $K = \frac{1}{2v}$ the conclusion follows. 
+By the above, there exists $L' \in \N$ such that for all $L \geq L'$ it holds that $d\left(\frac{L}{2v}\right) > \sfrac{1}{4}$, or in other words $\frac{L}{2v} < T^L_{mix}$ for all $L \geq L'$.
 \end{proof}
 
 
