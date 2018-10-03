@@ -1,38 +1,23 @@
-\section{Front propagation of the East-process}
+\section{Front propagation --- Proof of Theorem $2$}
 
 \begin{quote}
-{\small In this section we prove linear speed for the front of the East-process. The upper bound follows from classical results for Poisson point processes, while the lower bound is established by a comparison with the 1-sided contact process, closely following the arguments of \cite{blondel2018front}. }
+{\small We prove linear speed for the front of the East model. The upper bound follows from classical results for Poisson point processes, while the lower bound is established by a comparison with the one-sided contact process, closely following the arguments of \cite{blondel2018front}. }
 \end{quote}
-
-First we formalize the notion of the front that we discussed Subsection \ref{ssec:introduction}. 
-\begin{definition}
-For $A \subseteq \Z$ the front of $A$ is defined as $X(A) \defeq \max (A) \in \N \cup \{-\infty, \infty \}$ with $\max(\varnothing) \defeq -\infty$. 
-\end{definition}
-
-The following result will be used without proof:
-\begin{lemma}[{{\cite[Section 4 Theorems 4 \& 5]{durrett1983supercritical}}}]\label{lem:durrett}
-If $(\eta_t)_{t \geq 0}$ is a supercritical, 1-sided contact process and $\tau$ is the extinction time as defined in Subsection \ref{ssec:time_change}, then $\exists\ \alpha > 0$ such that for all  $a < \alpha$ there exist constants $\gamma, C > 0$ satisfying 
-\begin{align}\label{eqn:durret_decay}
-  \PrCond{X(\eta^{\{0\}}_t) < at\,}{\tau(\eta^{\{0\}}_.) = \infty} \leq C e^{-\gamma t}  && \forall t \geq 0. 
-  \intertext{Furthermore, if $|A| < \infty$  then there exist constants $\gamma, C > 0$ such that}
-  \Pr{t < \tau(\eta^A_.) < \infty } \leq C e^{-\gamma t} && \forall t \geq 0. 
-\end{align}
-\end{lemma}
 
 \subsection{Restart argument}
 
-\begin{theorem}[Coupling East and surviving contact processes]\label{thm:restart_coupling}
-There exists a process $(\sigma_t, \eta_t)_{t \geq 0}$ taking values in $\Omega^2$ and a random variable $T$ taking values in $[0, \infty)$ such that 
+\begin{theorem}\label{thm:restart_coupling}
+For each $p < 1$ with $\frac{p}{1-p} > \lambda_c$ there exists a process $(\sigma_t, \eta_t)_{t \geq 0}$ taking values in $\Omega^2$ and a random variable $T$ taking values in $[0, \infty)$ such that 
 \begin{enumerate}[(i)]
-  \item $(\sigma_t)$ is a supercritical East-process started from $\{0\}$
+  \item $(\sigma_t)$ is a (supercritical) East model with rate parameter $p$ started from $\{0\}$
   \item $\forall t \geq 0$ and $\forall x \in \Z$, it holds that $\eta_t(x) \leq \sigma_t(x)$
-  \item $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from $\{0\}$
+  \item $(\eta_{T+t})_{t \geq 0}$ is a surviving one-sided contact process started from $\{0\}$
 \end{enumerate}
 Furthermore $T$ has exponentially decaying tail probabilities. 
 \end{theorem}
 
 \begin{proof}
-Let $\{ \scr{P}^{(i)}\}_{i \in \N^+}$ be independent copies of $\scr{P}$. Denote by $\eta^{(i)}_.$ the 1-sided contact process started from $\{0\}$, constructed using $\scr{P}^{(i)}$. Furthermore let $U_i \defeq \tau(\eta^{(i)}_.)$ be the extinction time of $\eta^{(i)}_.$. Note that the $U_i$ are i.i.d. and $\mu \defeq \Pr{U_1 = \infty} > 0$ by Subsection \ref{ssec:time_change}. Define $L \defeq \min \{ i: U_i = \infty \}$ and note that $L$ has geometric distribution. Finally, let 
+Let $\{ \scr{C}^{(i)}\}_{i \in \N^+}$ be independent copies of $\scr{C}$. Denote by $\eta^{(i)}_.$ the one-sided contact process started from $\{0\}$, constructed using $\scr{C}^{(i)}$. Furthermore let $U_i \defeq \tau(\eta^{(i)}_.)$ be the extinction time of $\eta^{(i)}_.$. Note that the $U_i$ are i.i.d. and $\mu \defeq \Pr{U_1 = \infty} > 0$ by supercriticality. Define $L \defeq \min \{ i: U_i = \infty \}$ and note that $L$ has geometric distribution. Finally, let 
 \[
 T \defeq 
 \left\{
@@ -42,7 +27,7 @@ T \defeq
   \end{array}
 \right..
 \]
-First we show that $T$ has exponentially decaying tail probabilities. Note that since $T \geq 0$ almost surely, this is equivalent to finiteness of $\Ex{e^{s T}}$ for some $s > 0$. To see the latter holds for $T$ observe that conditional on $L$ the random variables $U_1, ..., U_{L-1}$ are i.i.d. with distribution equal to that of $U_1$ given $U_1 < \infty$. From (\ref{lem:durrett}) it follows that $U_1 | \{U_1 < \infty \}$ has exponentially decaying tail probabilities:
+First we show that $T$ has exponentially decaying tail probabilities. Note that since $T \geq 0$ almost surely, this is equivalent to finiteness of $\Ex{e^{s T}}$ for some $s > 0$. To see the latter holds for $T$ observe that conditional on $L$ the random variables $U_1, ..., U_{L-1}$ are i.i.d. with distribution equal to that of $U_1$ given $U_1 < \infty$. From Corollary \ref{cor:durrett} it follows that $U_1 | \{U_1 < \infty \}$ has exponentially decaying tail probabilities:
 \begin{align*}
 \Pr{U_1 > t\ | U_1 < \infty} = \frac{\Pr{t < U_1 < \infty}}{\Pr{U_1 < \infty}} \leq \frac{C e^{- \gamma t}}{1 - \mu}
 \end{align*}
@@ -54,31 +39,24 @@ Therefore there exists $s > 0$ such that $\ExCond{e^{sU_1}}{U_1 < \infty} < \inf
 where finiteseness follows as $L$ has geometric distribution and so finite moment generating function for all $s \in \R$. \\
 Now we construct the process $(\sigma_t, \eta_t)_{t \geq 0}$:
 \begin{enumerate}
-  \item Let $(\sigma^{[1]}_t, \eta^{[1]}_t)_{t \geq 0}$ be the basic coupling started from (\{0\}, \{0\}), constructed using $\scr{P}^{(1)}$. 
+  \item Let $(\sigma^{[1]}_t, \eta^{[1]}_t)_{t \geq 0}$ be the basic coupling started from (\{0\}, \{0\}), constructed using $\scr{C}^{(1)}$. 
   \item Assuming $(\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$ has been constructed, define $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0}$ as :
   \begin{itemize}
     \item If $T_i \defeq \sum\limits^i_{j=1} U_j = \infty$ then $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{t \geq 0}$
-    \item Else, set $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{T_i > t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{T_i > t \geq 0}$ and let $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq T_i}$ be the basic coupling started from $(\sigma^{[i]}_{T_i}, \{0\})$, constructed using $\scr{P}^{(i+1)}$. 
+    \item Else, set $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{T_i > t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{T_i > t \geq 0}$ and let $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq T_i}$ be the basic coupling started from $(\sigma^{[i]}_{T_i}, \{0\})$, constructed using $\scr{C}^{(i+1)}$. 
   \end{itemize}
 \end{enumerate}
-Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t)_{t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East-process started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving 1-sided contact process started from \{0\}. Noting that an East-process started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
+Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t)_{t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East model started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving one-sided contact process started from \{0\}. Noting that an East model started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
 \end{proof}
 
 \subsection{Linear lower bound on propagation}
-
-\begin{corollary}\label{cor:lower_linear_speed}
-Let $(\sigma_t)_{t \geq 0}$ be a supercritical East-process and $X(\sigma_t)$ be its front. Then $\exists\ \alpha > 0$ such that $\forall\ a < \alpha$ there exist constants $\gamma, C > 0$ satisfying 
-\begin{align}
-\Pr{X(\sigma_t) < at} \leq C e^{-\gamma t} && \forall t \geq 0. 
-\end{align}
-\end{corollary}
 
 \begin{remark}
 In the following proof the values of the constants $\gamma\ \&\ C$ change from line to line, without explicit mention. 
 \end{remark}
 
-\begin{proof}
-Let $(\sigma_t)_{t \geq 0},\ (\eta_t)_{t \geq 0}$ and $T$ be as in Theorem \ref{thm:restart_coupling}. Since $\eta_{T + .}$ survives, by Lemma \ref{lem:durrett} part (i) $\exists\ \alpha > 0$ such that for all $a < \alpha$ there exist $\gamma, C > 0$ satisfying 
+\begin{proof}[Proof of lower bound in Theorem \ref{main_thm:speed}]
+Let $(\sigma_t)_{t \geq 0},\ (\eta_t)_{t \geq 0}$ and $T$ be as in Theorem \ref{thm:restart_coupling}. Since $\eta_{T + .}$ survives, by Corollary \ref{cor:durrett} $\exists\ \alpha > 0$ such that for all $a < \alpha$ there exist $\gamma, C > 0$ satisfying 
 \begin{align}\label{eqn:surviving_exp_decay}
   \Pr{X(\eta_{T+t}) < at} &\leq C e^{- \gamma t}  &&\forall t \geq 0. 
 \end{align}
@@ -99,21 +77,19 @@ By Theorem \ref{thm:restart_coupling} part (ii) we know that $\eta_t \leq \sigma
 
 \subsection{Finite speed of propagation}
 
-\begin{definition}[Hitting times]\label{def:hitting_times}
-For the East-process $(\sigma^{\{0\}}_t)_{t \geq 0}$ define $\rho_l \defeq \min\{ t \geq 0 \mid \sigma^{\{0\}}_t(l) = 1\}$ for each $l \in \N$ to be the first time that the front reaches site $l$. 
+\begin{definition}\label{def:hitting_times}
+For the East model $(\sigma^{\{0\}}_t)_{t \geq 0}$ define $\rho_l \defeq \min\{ t \geq 0 \mid \sigma^{\{0\}}_t(l) = 1\}$ for each $l \in \N$ to be the first time that the front reaches site $l$. 
 \end{definition}
 
-Note that $0 = \rho_0 \leq \rho_1 \leq \rho_2 \leq \rho_l < \infty$ for all $l \in \N$ with finiteness following from at least linear propagation of the front since $\Pr{\rho_l = \infty} = \lim_{t \rightarrow \infty} \Pr{\rho_l > t} \leq \lim_{t \rightarrow \infty} \Pr{X\left( \sigma_t\right) < l} = 0$. \\
+Note that $0 = \rho_0 \leq \rho_1 \leq \rho_2 \leq \rho_l < \infty$ for all $l \in \N$ with finiteness following from at least linear propagation of the front since $\Pr{\rho_l = \infty} = \lim_{t \rightarrow \infty} \Pr{\rho_l > t} \leq \lim_{t \rightarrow \infty} \Pr{X\left( \sigma_t\right) < l} = 0$. We wish to bound the quantity $\Pr{\rho_l \leq t}$ to control the speed of the front since  $\{X \left( \sigma_t \right) \geq l \} \subset \{\rho_l \leq t \}$. \\
 
-We wish to bound the quantity $\Pr{\rho_l \leq t}$ to control the speed of the front since  $\{X \left( \sigma_t \right) \geq l \} \subset \{\rho_l \leq t \}$. To this end, consider the stopping times $\tau_x$ for each site $x \in \N$ defined as $\tau_{x+1} \defeq \min\{ T_{x+1, k} \mid T_{x+1, k} > \tau_x\ \text{ and } k \in \N^+ \}$ with $\tau_0 = 0$. Consider the process $M_t \defeq |\{x \geq 1 \mid \tau_x \leq t \}|$ i.e. the process counting the number of $\tau_x$ that have occured up to time t. By repeated application of the strong Markov property we get that the process $(M_t)_{t \geq 0}$ is in fact a Poisson process of rate 1. \\
-
-For all $t \geq 0$ and $l \in \N$ define $F(l, t)$ to be the event that there is an increasing sequence of rings starting at site 1 and ending at site $l$ in the time interval $[0, t]$. It is clear that $\Pr{\rho_l \leq t} \leq \Pr{F(l, t)}$ and by the definition of $(M_t)_{t \geq 0}$ it follows that $\Pr{F(l, t)} = \Pr{M_t \geq l}$. The following standard result gives us the desired upper bound. 
+Consider the stopping times $\tau_x$ for each site $x \in \N$ defined as $\tau_{x+1} \defeq \min\{ T_{x+1, k} \mid T_{x+1, k} > \tau_x\ \text{ and } k \in \N^+ \}$ with $\tau_0 = 0$. Define the process $M_t \defeq |\{x \geq 1 \mid \tau_x \leq t \}|$ to be the process counting the number of $\tau_x$ that have occured up to time t. By repeated application of the strong Markov property it follows that the process $(M_t)_{t \geq 0}$ is in fact a Poisson process of rate 1. Define $F(M, t)$ to be the event that there is an increasing sequence of rings starting at site 1 and ending at site $M$ in the time interval $[0, t]$. By the definition of $(M_t)_{t \geq 0}$ it follows that $\Pr{F(M, t)} = \Pr{M_t \geq M}$. This, combined with the following standard result gives us the desired upper bound. 
 
 \begin{lemma}\label{lem:chernoff}
 Let $X \sim \dPoi{\lambda}$ be a Poisson random variable with mean $\lambda > 0$. Then 
-\begin{align}
+\begin{align*}
 \Pr{X \geq x} &\leq \frac{e^{-\lambda}(e \lambda)^x}{x^x} &&\forall x > \lambda. 
-\end{align} 
+\end{align*} 
 \end{lemma}
 
 \begin{proof}
@@ -124,23 +100,16 @@ The result follows by a Chernoff bound argument. For all $t > 0$ we have
 The minimum occurs at $t = \log\left( \frac{x}{\lambda} \right)$, giving the result. 
 \end{proof}
 
-We are now ready to prove the linear upper bound on the speed of the East-process.
-
-\begin{theorem}\label{thm:speed_upper_bound}
-Let $(\sigma^{\{0\}}_t)_{t \geq 0}$ be an East-process and $X(\sigma^{\{0\}}_t)$ be its front. Then there exist constant $v, \gamma > 0$ such that 
-\begin{align}
-\Pr{X(\sigma^{\{0\}}_t) > vt} &\leq e^{- \gamma t} &&\forall t \geq 0. 
-\end{align}
-\end{theorem}
+We are now ready to prove the linear upper bound on the speed of the East model.
 
 \begin{remark}
 In the following proof we omit the use of the floor function $\floor{\cdot}$ for clarity of notation, treating non-integer values as integers. It is however clear that the proof could be adapted to be precise. 
 \end{remark}
 
-\begin{proof}
+\begin{proof}[Proof of upper bound in Theorem \ref{main_thm:speed}]
 Let $v > 1$. Using Lemma \ref{lem:chernoff} and the discussion before it the calculation of an upper bound becomes straightforward:
 \begin{align*}
-\Pr{X(\sigma_t) > vt} &\leq \Pr{\rho_{vt} \leq t} \leq \Pr{F(vt, t)} = \Pr{M_t \geq vt} \\
+\Pr{X(\sigma_t) > vt} &\leq \Pr{\rho_{vt} \leq t} = \Pr{M_t \geq vt} \\
                       &\leq \frac{e^{-t}(e t)^{vt}}{(vt)^{vt}} = \exp\left( -t + vt(\log\left(\sfrac{t}{vt}\right) + 1)\right) \\
                       &= \exp\left( -t + vt (1 - \log(v))\right) \leq \exp(vt (1 - \log(v)))
 \end{align*}

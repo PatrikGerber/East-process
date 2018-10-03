@@ -10,8 +10,28 @@
 \usepackage{chngcntr}
 \usepackage{sectsty}
 \usepackage{xfrac}
+\usepackage{bbm}
 \usepackage{hyperref} % Uncommment to make references clickable
-\usepackage[a4paper,margin=1.5in,footskip=0.25in]{geometry}
+\usepackage[a4paper,margin=1.3in,footskip=0.25in]{geometry}
+
+% Creating command `renewtheorem'. Used in the section `main results' to temporarily change the numbering of theorems so that we can have `theorem 1' and not `theorem 2.1'. 
+\makeatletter
+\def\renewtheorem#1{%
+  \expandafter\let\csname#1\endcsname\relax
+  \expandafter\let\csname c@#1\endcsname\relax
+  \gdef\renewtheorem@envname{#1}
+  \renewtheorem@secpar
+}
+\def\renewtheorem@secpar{\@ifnextchar[{\renewtheorem@numberedlike}{\renewtheorem@nonumberedlike}}
+\def\renewtheorem@numberedlike[#1]#2{\newtheorem{\renewtheorem@envname}[#1]{#2}}
+\def\renewtheorem@nonumberedlike#1{  
+\def\renewtheorem@caption{#1}
+\edef\renewtheorem@nowithin{\noexpand\newtheorem{\renewtheorem@envname}{\renewtheorem@caption}}
+\renewtheorem@thirdpar
+}
+\def\renewtheorem@thirdpar{\@ifnextchar[{\renewtheorem@within}{\renewtheorem@nowithin}}
+\def\renewtheorem@within[#1]{\renewtheorem@nowithin[#1]}
+\makeatother
 
 % Configuring style of references
 \hypersetup{
@@ -99,6 +119,10 @@
 \begin{document}
 
 \include{Section_Introduction}
+
+\include{Section_Results}
+
+\include{Section_Contact}
 
 \include{Section_Speed}
 
