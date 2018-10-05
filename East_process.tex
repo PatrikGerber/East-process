@@ -14,6 +14,13 @@
 \usepackage{hyperref} % Uncommment to make references clickable
 \usepackage[a4paper,margin=1.3in,footskip=0.25in]{geometry}
 
+% The title page
+\title{The oriented contact process and the East model}
+\date{\today}
+\author{Patrik Gerber\thanks{Supported by an LMS Undergraduate Research Bursary and the Institute of Mathematics, University of Oxford
+}\\ Department of Statistics, University of Oxford
+\and Advisor: Prof. Paul Chleboun\\ Department of Statistics, University of Oxford}
+
 % Creating command `renewtheorem'. Used in the section `main results' to temporarily change the numbering of theorems so that we can have `theorem 1' and not `theorem 2.1'. 
 \makeatletter
 \def\renewtheorem#1{%
@@ -113,12 +120,20 @@
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
+% Deleting abstract title
+% \renewcommand{\abstractname}{\vspace{-\baselineskip}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
+\maketitle
 
-\include{Section_Introduction}
+% \begin{abstract}
+% \input{Abstract}
+% \end{abstract}
+
+\input{Section_Introduction}
 
 \include{Section_Results}
 

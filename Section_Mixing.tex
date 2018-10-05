@@ -1,18 +1,18 @@
 \section{Mixing --- Proof of Theorem $3$}
 \begin{quote}
-{\small We prove that the mixing time of the supercritical East model on $[0, L]$ with a 1 fixed at the origin is $\Theta(L)$. }
+{\small We prove that the mixing time of the supercritical East process on $[0, L]$ with a 1 fixed at the origin is $\Theta(L)$. }
 \end{quote}
 
-In this section we will study the evolution of the East model restricted to the segment [0, L] where $L \in \N$. In doing so we will assume that there is a 1 fixed at the origin. However, because of the local constraint of the East model, when studying the East model restricted to $\{0, 1, ..., L\}$ it doesn't matter whether we 1) fix a 1 at the origin or 2) only consider East modeles started from $\{0\} \subseteq \xi \subseteq \N$; the results of the analysis will be the same. Motivated by this we make two definitions:
+In this section we will study the evolution of the East process restricted to the segment [0, L] where $L \in \N$. In doing so we will assume that there is a 1 fixed at the origin. However, because of the local constraint of the East process, when studying the East process restricted to $\{0, 1, ..., L\}$ it doesn't matter whether we 1) fix a 1 at the origin or 2) only consider East processes started from $\{0\} \subseteq \xi \subseteq \N$; the results of the analysis will be the same. Motivated by this we make two definitions:
 
 \begin{definition}
-Define $\widetilde{\Omega} \defeq \{A \subseteq \N \mid 0 \in A \}$ to be the set of configurations that are 0 on the negatives and 1 at the origin. Similarly, for $L \in \N$ define $\Omega_L \defeq \{ A \cap [0, L] \mid A \in \widetilde{\Omega} \}$ to be the state space of the East model on $\{0, 1, ..., L\}$ with a fixed 1 at the origin. 
+Define $\widetilde{\Omega} \defeq \{A \subseteq \N \mid 0 \in A \}$ to be the set of configurations that are 0 on the negatives and 1 at the origin. Similarly, for $L \in \N$ define $\Omega_L \defeq \{ A \cap [0, L] \mid A \in \widetilde{\Omega} \}$ to be the state space of the East process on $\{0, 1, ..., L\}$ with a fixed 1 at the origin. 
 \end{definition}
 
-Another important property of the East model is that the evolution at some site $x \in \N$ is not influenced by how the process evolves at sites to the right of $x$. More precisely, if $(\sigma_t)_{t \geq 0}$ is an East model then for any $x \in \N$ and $t \geq 0$, $\sigma_t (x)$ is independent of the sigma algebra $\sigma \left( (E_{n,k}, B_{n,k})_{n > x, k > 0}\right)$. Furthermore, if we fix a 1 at the origin (or equivalently start from a configuration in $\widetilde{\Omega}$) then an even stronger independence holds in that the evolution to the right of the origin is independent of all the clock rings and coin tosses left of the origin. Therefore the East model with a fixed 1 at the origin is a continuous time Markov chain when restricted to $\{0, 1, ..., L\}$. 
+Another important property of the East process is that the evolution at some site $x \in \N$ is not influenced by how the process evolves at sites to the right of $x$. More precisely, if $(\sigma_t)_{t \geq 0}$ is an East process then for any $x \in \N$ and $t \geq 0$, $\sigma_t (x)$ is independent of the sigma algebra $\sigma \left( (E_{n,k}, B_{n,k})_{n > x, k > 0}\right)$. Furthermore, if we fix a 1 at the origin (or equivalently start from a configuration in $\widetilde{\Omega}$) then an even stronger independence holds in that the evolution to the right of the origin is independent of all the clock rings and coin tosses left of the origin. Therefore the East process with a fixed 1 at the origin is a continuous time Markov chain when restricted to $\{0, 1, ..., L\}$. 
 
 \subsection{Coupling time}
-As before, let $(\sigma^\xi_t)_{t \geq 0}$ denote the East model on $\Z$ started from initial configuration $\xi \in \Omega$, constructed using $\scr{C} = (E_{x,k}, B_{x,k})_{x \in \Z,\ k \in \N^+}$. Recall the definition of the hitting times $(\rho_i)_{i \in \N}$ from Definition \ref{def:hitting_times}.  
+As before, let $(\sigma^\xi_t)_{t \geq 0}$ denote the East process on $\Z$ started from initial configuration $\xi \in \Omega$, constructed using $\scr{C} = (E_{x,k}, B_{x,k})_{x \in \Z,\ k \in \N^+}$. Recall the definition of the hitting times $(\rho_i)_{i \in \N}$ from Definition \ref{def:hitting_times}.  
 
 
 \begin{proposition}\label{prop:East_linear_coupling}
@@ -23,7 +23,7 @@ For each $l \in \N$ and for all $\xi, \nu \in \widetilde{\Omega}$ it holds that
 \end{proposition}
 
 \begin{proof}
-We only prove (\ref{eqn:hitting_coupling}) for $\nu = \{0\}$ from which the result follows easily for arbitrary $\nu$. We proceed by induction. The claim clearly holds for $l=0$ since every such $\xi$ has a 1 at the origin forever. For the induction step suppose that the claim holds up to $l=n \geq 0$. If $K$ is such that $T_{n+1, K} = \rho_{n+1}$ then $B_{n+1, K}=1$, and since the ring is legal, $\sigma^{\{0\}}_{\rho_{n+1}}(n) = 1$. By the induction hypothesis also $\sigma^\xi_{\rho_{n+1}}(n) = 1$ i.e. the ring is also legal for $\sigma^\xi_.$. Thus both processes update to 1 at time $\rho_{n+1}$. Now, since the $\rho_i$ are stopping times, $(\sigma^{\{0\}}_{\rho_{n+1}+t})_{t \geq 0}$ and $(\sigma^\xi_{\rho_{n+1} + t})_{t \geq 0}$ are two East modeles with $\sigma^{\{0\}}_{\rho_{n+1}} \cap [0, n+1] = \sigma^\xi_{\rho_{n+1}} \cap [0, n+1] $. The conclusion follows by basic coupling. 
+We only prove (\ref{eqn:hitting_coupling}) for $\nu = \{0\}$ from which the result follows easily for arbitrary $\nu$. We proceed by induction. The claim clearly holds for $l=0$ since every such $\xi$ has a 1 at the origin forever. For the induction step suppose that the claim holds up to $l=n \geq 0$. If $K$ is such that $T_{n+1, K} = \rho_{n+1}$ then $B_{n+1, K}=1$, and since the ring is legal, $\sigma^{\{0\}}_{\rho_{n+1}}(n) = 1$. By the induction hypothesis also $\sigma^\xi_{\rho_{n+1}}(n) = 1$ i.e. the ring is also legal for $\sigma^\xi_.$. Thus both processes update to 1 at time $\rho_{n+1}$. Now, since the $\rho_i$ are stopping times, $(\sigma^{\{0\}}_{\rho_{n+1}+t})_{t \geq 0}$ and $(\sigma^\xi_{\rho_{n+1} + t})_{t \geq 0}$ are two East processes with $\sigma^{\{0\}}_{\rho_{n+1}} \cap [0, n+1] = \sigma^\xi_{\rho_{n+1}} \cap [0, n+1] $. The conclusion follows by basic coupling. 
 \end{proof}
 
 We present a standard result for continuous time Markov chains that combined with the previous proposition gives us a powerful tool. 
@@ -46,7 +46,7 @@ By Theorem \ref{thm:equilibrium_distance} it holds that
 \begin{equation}\nonumber
 d(t) \leq \max\limits_{\nu, \xi \in \widetilde{\Omega}} \Pr{ \tau^{\nu, \xi}_{couple} > t }
 \end{equation}
-Where $\tau^{\nu, \xi}_{couple}$ is the first time that the East model started from $\xi$ and $\nu$ (and thus with a fixed 1 at the origin) coincide on $\{0, 1 ... L\}$ under the basic coupling. Lemma \ref{prop:East_linear_coupling} gives $\max\limits_{\nu, \xi \in \widetilde{\Omega}} \Pr{\tau^{\nu, \xi}_{couple} > t } \leq \Pr{\rho_L > t}$. Take $\alpha > 0$ such that Theorem \ref{main_thm:speed} is satisfied. We have
+Where $\tau^{\nu, \xi}_{couple}$ is the first time that the East process started from $\xi$ and $\nu$ (and thus with a fixed 1 at the origin) coincide on $\{0, 1 ... L\}$ under the basic coupling. Lemma \ref{prop:East_linear_coupling} gives $\max\limits_{\nu, \xi \in \widetilde{\Omega}} \Pr{\tau^{\nu, \xi}_{couple} > t } \leq \Pr{\rho_L > t}$. Take $\alpha > 0$ such that Theorem \ref{main_thm:speed} is satisfied. We have
 \begin{align*}
 \Pr{\rho_L > KL} &\leq \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < L} \\
                  &= \Pr{X\left(\sigma^{\{0\}}_{KL}\right) < \frac{KL}{K}}. \\

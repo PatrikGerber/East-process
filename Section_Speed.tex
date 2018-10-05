@@ -1,7 +1,7 @@
 \section{Front propagation --- Proof of Theorem $2$}
 
 \begin{quote}
-{\small We prove linear speed for the front of the East model. The upper bound follows from classical results for Poisson point processes, while the lower bound is established by a comparison with the one-sided contact process, closely following the arguments of \cite{blondel2018front}. }
+{\small We prove linear speed for the front of the East process. The upper bound follows from classical results for Poisson point processes, while the lower bound is established by a comparison with the one-sided contact process, closely following the arguments of \cite{blondel2018front}. }
 \end{quote}
 
 \subsection{Restart argument}
@@ -9,7 +9,7 @@
 \begin{theorem}\label{thm:restart_coupling}
 For each $p < 1$ with $\frac{p}{1-p} > \lambda_c$ there exists a process $(\sigma_t, \eta_t)_{t \geq 0}$ taking values in $\Omega^2$ and a random variable $T$ taking values in $[0, \infty)$ such that 
 \begin{enumerate}[(i)]
-  \item $(\sigma_t)$ is a (supercritical) East model with rate parameter $p$ started from $\{0\}$
+  \item $(\sigma_t)$ is a (supercritical) East process with rate parameter $p$ started from $\{0\}$
   \item $\forall t \geq 0$ and $\forall x \in \Z$, it holds that $\eta_t(x) \leq \sigma_t(x)$
   \item $(\eta_{T+t})_{t \geq 0}$ is a surviving one-sided contact process started from $\{0\}$
 \end{enumerate}
@@ -46,7 +46,7 @@ Now we construct the process $(\sigma_t, \eta_t)_{t \geq 0}$:
     \item Else, set $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{T_i > t \geq 0} \defeq (\sigma^{[i]}_t, \eta^{[i]}_t)_{T_i > t \geq 0}$ and let $(\sigma^{[i+1]}_t, \eta^{[i+1]}_t)_{t \geq T_i}$ be the basic coupling started from $(\sigma^{[i]}_{T_i}, \{0\})$, constructed using $\scr{C}^{(i+1)}$. 
   \end{itemize}
 \end{enumerate}
-Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t)_{t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East model started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving one-sided contact process started from \{0\}. Noting that an East model started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
+Since $L$ has a geometric distribution, $L < \infty$ a.s. and we may define $(\sigma_t, \eta_t)_{t \geq 0} \defeq (\sigma^{[L]}_t, \eta^{[L]}_t)_{t \geq 0}$. As the $U_i$ are stopping times, $(\sigma_t)_{t \geq 0}$ is an East process started from \{0\}. It also follows that $(\eta_{T+t})_{t \geq 0}$ is a surviving one-sided contact process started from \{0\}. Noting that an East process started from \{0\} alwas has a 1 at the origin, it follows that $\eta_t \leq \sigma_t\ \forall t \geq 0$. 
 \end{proof}
 
 \subsection{Linear lower bound on propagation}
@@ -78,7 +78,7 @@ By Theorem \ref{thm:restart_coupling} part (ii) we know that $\eta_t \leq \sigma
 \subsection{Finite speed of propagation}
 
 \begin{definition}\label{def:hitting_times}
-For the East model $(\sigma^{\{0\}}_t)_{t \geq 0}$ define $\rho_l \defeq \min\{ t \geq 0 \mid \sigma^{\{0\}}_t(l) = 1\}$ for each $l \in \N$ to be the first time that the front reaches site $l$. 
+For the East process $(\sigma^{\{0\}}_t)_{t \geq 0}$ define $\rho_l \defeq \min\{ t \geq 0 \mid \sigma^{\{0\}}_t(l) = 1\}$ for each $l \in \N$ to be the first time that the front reaches site $l$. 
 \end{definition}
 
 Note that $0 = \rho_0 \leq \rho_1 \leq \rho_2 \leq \rho_l < \infty$ for all $l \in \N$ with finiteness following from at least linear propagation of the front since $\Pr{\rho_l = \infty} = \lim_{t \rightarrow \infty} \Pr{\rho_l > t} \leq \lim_{t \rightarrow \infty} \Pr{X\left( \sigma_t\right) < l} = 0$. We wish to bound the quantity $\Pr{\rho_l \leq t}$ to control the speed of the front since  $\{X \left( \sigma_t \right) \geq l \} \subset \{\rho_l \leq t \}$. \\
@@ -100,7 +100,7 @@ The result follows by a Chernoff bound argument. For all $t > 0$ we have
 The minimum occurs at $t = \log\left( \frac{x}{\lambda} \right)$, giving the result. 
 \end{proof}
 
-We are now ready to prove the linear upper bound on the speed of the East model.
+We are now ready to prove the linear upper bound on the speed of the East process.
 
 \begin{remark}
 In the following proof we omit the use of the floor function $\floor{\cdot}$ for clarity of notation, treating non-integer values as integers. It is however clear that the proof could be adapted to be precise. 

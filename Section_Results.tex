@@ -20,15 +20,15 @@ If $(\eta_t)_{t \geq 0}$ is a supercritical, one-sided contact process then ther
 Using these results for the supercritical one-sided contact process we go on to show 
 
 \begin{theorem}\label{main_thm:speed}
-Let $(\sigma^{\{0\}}_t)_{t \geq 0}$ be an East model. Then there exist constants $v, \gamma > 0$ such that for all $t \geq 0$ we have
+Let $(\sigma^{\{0\}}_t)_{t \geq 0}$ be an East process. Then there exist constants $v, \gamma > 0$ such that for all $t \geq 0$ we have
 \begin{align*}
 \Pr{X(\sigma^{\{0\}}_t) > vt} &\leq e^{- \gamma t}. \\
 \intertext{Furthermore, if $(\sigma^{\{0\}}_t)_{t \geq 0}$ is supercritical then $\exists\ \alpha > 0$ such that $\forall\ a < \alpha$ there exist constants $\gamma, C > 0$ such that for all $t \geq 0$ it holds that } 
-\Pr{X(\sigma_t) < at} &\leq C e^{-\gamma t}.
+\Pr{X(\sigma^{\{0\}}_t) < at} &\leq C e^{-\gamma t}.
 \end{align*}
 \end{theorem}
 
-Our third result concerns the \textit{mixing time} of the East model. To make sense of this first we need the notion of \textit{total variation distance} and \textit{distance from equilibrium}. 
+Our third result concerns the \textit{mixing time} of the East process. To make sense of this first we need the notion of \textit{total variation distance} and \textit{distance from equilibrium}. 
 \begin{definition}[Total variation distance]
 Let $(\Omega, \cal{F})$ be a measurable space and $\nu, \mu$ be two probability measures on it. The total variation distance of $\nu$ and $\mu$ is defined as $\left\Vert \nu(\cdot) - \mu(\cdot) \right\Vert_{TV} \defeq \sup\limits_{A \in \cal{F}} \left| \nu(A) - \mu(A) \right|$
 \end{definition}
@@ -40,13 +40,17 @@ d(t) \defeq \max\limits_{x \in \Omega} \left\Vert \PrCond{N_t \in \cdot\ }{N_0 =
 to be the worst case total variation distance from equilibrium. 
 \end{definition}
 
-When restricted to $\{0, 1, ... L\}$, the East model with a fixed 1 at the origin is a finite, irreducible, continuous time Markov chain with equilibrium measure $\pi_L \defeq \delta_{1} \times \dBer{p}^L$. The mixing time then can be described as the time it takes to get close to the equilibrium distribution:
-\begin{definition}[Mixing time of East model]
-The mixing time of the East model with a fixed 1 at the origin is defined as $T^L_{mix} \defeq \inf\left\{ t \geq 0 \mid d(t) \leq \sfrac{1}{4} \right\}$. 
+When restricted to $\{0, 1, ... L\}$, the East process with a fixed 1 at the origin is a finite, irreducible, continuous time Markov chain with equilibrium measure $\pi_L \defeq \delta_{1} \times \dBer{p}^L$. The mixing time then can be described as the time it takes to get close to the equilibrium distribution:
+\begin{definition}[Mixing time of East process]
+The mixing time of the East process with a fixed 1 at the origin is defined as $T^L_{mix} \defeq \inf\left\{ t \geq 0 \mid d(t) \leq \sfrac{1}{4} \right\}$. 
 \end{definition}
 
 \begin{theorem}\label{main_thm:mixing}
-For every East model there exists a constant $K > 0$ such that $T^L_{mix} \leq KL$ for all $L \in \N$. Moreover, if the East model is supercritical then there exists a constant $K' > 0$ such that $K'L \leq T^L_{mix}$ for all $L \in \N$. 
+The mixing time of the East process satisfies $T^L_{mix} = \Theta(L)$. 
 \end{theorem}
+
+\begin{remark}
+Our proof of Theorem \ref{main_thm:mixing} is based off Theorem \ref{main_thm:speed}. Theorem \ref{main_thm:speed} is known to hold for all $p \in (0,1)$ not just supercritical. In this paper however we only prove it for $p > p_c$ hence if regarded as a self contained document, we only show Theorem \ref{main_thm:mixing} for $p > p_c$. 
+\end{remark}
 
 \renewtheorem{theorem}{Theorem}[section]
