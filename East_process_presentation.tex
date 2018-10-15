@@ -18,8 +18,8 @@
 \renewcommand*{\bibfont}{\scriptsize}
 \addbibresource{bibliography_presentation.bib}
 
-\setbeameroption{show notes on second screen=right} % comment to get rid of notes
-\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}\usepackage{palatino}
+% \setbeameroption{show notes on second screen=right} % comment to get rid of notes
+% \setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}\usepackage{palatino}
 
 % Defining custom macros
 \renewcommand{\cal}[1]{\mathcal{#1}}
@@ -300,9 +300,9 @@ The one-sided contact process is similar to the East process, but `recovery` is 
 \pause
 Same graphical structure for East and contact processes $\Rightarrow$ `basic coupling`. \\
 \pause
-Let $(\eta_t)_{t \geq 0}$ be the one-sided contact process started from $\{0\}$. Then under the basic coupling
+Under the basic coupling
 \begin{align*}
-\eta_{t} &\leq \sigma_{t} &&\forall t \geq 0. 
+(\text{Oriented contact process}) \hspace{2mm} \eta_{t} &\leq \sigma_{t} \hspace{2mm} (\text{East process}) &&\forall t \geq 0. 
 \end{align*}
 \pause
 In particular, 
@@ -358,7 +358,21 @@ Hinted at in \cite{durrett1983supercritical} but never proved in detail.
 
 \section{Percolation construction}
 \begin{frame}
-\frametitle{Percolation construction}
+\frametitle{Percolation construction 1}
+\pause
+\vspace{1mm}
+\begin{definition}
+$\{(z(r), r)\}_{r \in [t,s]} \subset \Z \times \R_{\geq 0}$ is a \textit{path} if it follows arrows and goes through no cross. 
+\end{definition}
+\pause
+\begin{figure}[!h]
+\includegraphics[scale=0.85]{images/path}
+\caption{Red and blue lines are examples of a path. }
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Percolation construction 2}
 \pause
 \begin{figure}[!h]
 \includegraphics[scale=0.85]{images/simple_tiling}
